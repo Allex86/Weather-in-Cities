@@ -2,54 +2,35 @@
 import './App.css';
 import Cities from './components/Cities.js';
 import Weather from './components/Weather.js';
-import React, { useState/*, useEffect*/ } from 'react';
+import React, { useState /*, useEffect*/ } from 'react';
+
+import Jumbotron from 'react-bootstrap/Jumbotron';
+import Card from 'react-bootstrap/Card';
 
 function App() {
 
     const cities = ['Canberra', 'Dublin', 'Jakarta', 'Kyiv', 'Monaco', 'Moscow', 'Paris', 'Riga', 'Tallinn', 'Tokyo', 'Warsaw', 'Washington', 'Zagreb'];
 
     const [currentCity, setCity] = useState(null);
-    // useEffect(() => {
-    //     console.log('setCity--- ' + currentCity);
-    // });
+    // useEffect(() => {  console.log('setCity--- ' + currentCity) });
 
     function handleClick(e) {
-        // e.preventDefault();
         setCity(e);
-        // console.log('log-- ' + e);
     }
 
     return (
-        <div className="App" style={{backgroundColor: '#282c34', minHeight: 100 +'vh'}}>
-            {/*<header className="App-header">
-            </header>*/}
-            <header className="App-header">
-                {/*<img src={logo} className="App-logo" alt="logo" />*/}
-                {/*<p>
-                  Edit <code>src/App.js</code> and save to reload.
-                </p>*/}
-                <p>
-                    погода в столицах мира
-                </p>
-                {/*<a
-                  className="App-link"
-                  href="https://reactjs.org"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Learn React
-                </a>*/}
+        <Jumbotron fluid className="text-center" style={{margin: 0, minHeight: 100 + 'vh'}}>
+            <h1>Погода в столицах мира</h1>
 
-                <Cities cities={cities} onClick={handleClick}/>
-
+            <Cities cities={cities} onClick={handleClick}/>
+            <Card style={{minWidth: '300px', width: '80%', margin: '0 auto'}}>
                 {currentCity !== null
                     ? <Weather currentCity={currentCity} />
-                    : <p>выберите город</p>
+                    : <Card.Body><Card.Title>Выберите город</Card.Title></Card.Body>
                 }
-            
-              </header>
-        </div>
-    );
+            </Card>
+        </Jumbotron>
+    )
 }
 
 export default App;
